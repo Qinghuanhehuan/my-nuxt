@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <nuxt />
-  </div>
+<div>
+  <nav>
+    <nuxt-link to="/">⾸⻚</nuxt-link>
+    <!--别名：n-link，NLink，NuxtLink-->
+    <NLink to="/admin">管理</NLink>
+    <n-link to="/cart">购物⻋</n-link>
+  </nav>
+  <!-- 页面内容占位符 -->
+  <nuxt />
+</div>
 </template>
 
 <style>

@@ -1,5 +1,6 @@
 
 module.exports = {
+  //服务端渲染，如果设置单页渲染使用spa
   mode: 'universal',
   /*
   ** Headers of the page
@@ -25,11 +26,22 @@ module.exports = {
   css: [
     'element-ui/lib/theme-chalk/index.css'
   ],
+  //路由相关的配置，扩展路由;foo为别名
+  router:{
+    extendRoutes(routes,resolve){
+      routes.push({
+        name:'foo',
+        path:'/foo',
+        component:resolve(__dirname,"pages/custom.vue")
+      })
+    }
+  },
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/interceptor'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,7 +52,15 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
+  axios:{
+    proxy:true
+  },
+  proxy:{
+    '/api':"http://localhost:8080"
+  },
   /*
   ** Build configuration
   */
